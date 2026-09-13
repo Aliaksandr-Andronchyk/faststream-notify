@@ -1,4 +1,4 @@
-"""Pure formatting logic — kept free of broker concerns so it is trivially unit-testable."""
+"""Pure formatting logic – kept free of broker concerns so it is trivially unit-testable."""
 
 from app.schemas import EmailNotification, LessonBooked, LessonCancelled
 
