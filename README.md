@@ -16,9 +16,9 @@ lesson.booked    ──▶ handle_lesson_booked    ──▶ notifications.email
 lesson.cancelled ──▶ handle_lesson_cancelled ──▶ notifications.email ──▶ send_email
 ```
 
-- Events are validated with **pydantic v2** schemas — malformed payloads are rejected
-- Message formatting is pure, broker-free code (`app/notifications.py`) — unit-tested directly
-- Handlers are integration-tested with FastStream's **in-memory `TestRabbitBroker`** —
+- Events are validated with **pydantic v2** schemas – malformed payloads are rejected
+- Message formatting is pure, broker-free code (`app/notifications.py`) – unit-tested directly
+- Handlers are integration-tested with FastStream's **in-memory `TestRabbitBroker`** –
   no RabbitMQ needed to run the suite
 - `send_email` is a demo transport (logs the message); swap in SMTP/SES in production
 
