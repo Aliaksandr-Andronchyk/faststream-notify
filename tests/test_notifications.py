@@ -22,6 +22,19 @@ def test_booking_confirmation_format():
     assert "10:00–11:00" in note.body
 
 
+def test_booking_confirmation_shows_end_date_when_crossing_midnight():
+    event = LessonBooked(
+        lesson_id=1,
+        tutor_name="Anna",
+        student_name="Ivan",
+        student_email="ivan@example.com",
+        starts_at=datetime(2026, 8, 1, 23, 30),
+        ends_at=datetime(2026, 8, 2, 0, 30),
+    )
+    note = booking_confirmation(event)
+    assert "02.08.2026 00:30" in note.body
+
+
 def test_cancellation_notice_with_reason():
     event = LessonCancelled(
         lesson_id=1,
