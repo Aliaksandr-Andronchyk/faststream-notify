@@ -7,7 +7,8 @@ TIME_FORMAT = "%d.%m.%Y %H:%M"
 
 def booking_confirmation(event: LessonBooked) -> EmailNotification:
     starts = event.starts_at.strftime(TIME_FORMAT)
-    ends = event.ends_at.strftime("%H:%M")
+    same_day = event.ends_at.date() == event.starts_at.date()
+    ends = event.ends_at.strftime("%H:%M" if same_day else TIME_FORMAT)
     return EmailNotification(
         to=event.student_email,
         subject=f"Lesson confirmed: {starts}",
