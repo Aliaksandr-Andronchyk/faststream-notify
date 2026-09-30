@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Literal
 
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Field, model_validator
 
 
 class LessonBooked(BaseModel):
@@ -11,6 +11,12 @@ class LessonBooked(BaseModel):
     student_email: EmailStr
     starts_at: datetime
     ends_at: datetime
+
+    @model_validator(mode="after")
+    def check_ends_after_starts(self) -> "LessonBooked":
+        if self.ends_at <= self.starts_at:
+            raise ValueError("ends_at must be after starts_at")
+        return self
 
 
 class LessonCancelled(BaseModel):
